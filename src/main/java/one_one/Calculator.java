@@ -1,4 +1,4 @@
-package calculator_1;
+package one_one;
 
 import java.util.Scanner;
 
@@ -17,10 +17,10 @@ public class Calculator {
         System.out.print("Second number: ");
         int number2 = scanner.nextInt();
 
-        calculateV1(number1, operator, number2);
+        calculateV1basic(number1, operator, number2);
     }
 
-    private static void calculateV1(int number1, String operation, int number2) {
+    private static void calculateV1basic(int number1, String operation, int number2) {
         if ((operation.length() != 1) | (!operation.matches("[/*\\-+]"))) {
             throw new IllegalArgumentException("Wrong or unsupported operator: " + operation);
         }
@@ -46,7 +46,7 @@ public class Calculator {
         }
     }
 
-    private static void calculateV2(int number1, String operation, int number2) {
+    private static void calculateV2basic(int number1, String operation, int number2) {
         String outputPrefix = "The answer is: ";
 
         switch (operation) {
