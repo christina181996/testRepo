@@ -1,6 +1,6 @@
 package two_one;
 
-public class BakedGoods extends Sweets {
+public class BakedGoods extends Sweet {
     private boolean isGlazed;
 
     public BakedGoods(String sweetBrand, int sweetPrice, int sweetWeight, String type, boolean isGlazed) {

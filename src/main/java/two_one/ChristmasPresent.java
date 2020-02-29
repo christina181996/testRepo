@@ -3,16 +3,16 @@ package two_one;
 import java.util.ArrayList;
 
 public class ChristmasPresent {
-    private ArrayList<Sweets> presentContent;
+    private ArrayList<Sweet> presentContent;
 
-    public ChristmasPresent(ArrayList<Sweets> presentContent) {
+    public ChristmasPresent(ArrayList<Sweet> presentContent) {
         this.presentContent = presentContent;
     }
 
     public int getPresentWeight() {
         int totalWeight = 0;
-        for (Sweets candiesWeights : presentContent) {
-            totalWeight += candiesWeights.getSweetWeight();
+        for (Sweet candiesWeights : presentContent) {
+            totalWeight += candiesWeights.getWeight();
         }
         return totalWeight;
     }
