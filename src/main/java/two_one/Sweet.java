@@ -1,11 +1,13 @@
 package two_one;
 
+import java.util.Objects;
+
 import lombok.Getter;
 import lombok.Setter;
 
 @Getter
 @Setter
-public class Sweet {
+abstract class Sweet implements Comparable<Sweet> {
     private String brand;
     private int price;
     private int weight;
@@ -16,5 +18,30 @@ public class Sweet {
         this.price = price;
         this.weight = weight;
         this.type = type;
+    }
+
+    @Override
+    public int compareTo(Sweet o) {
+        return this.price - o.price;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (!(o instanceof Sweet)) {
+            return false;
+        }
+        Sweet sweet = (Sweet) o;
+        return price == sweet.price &&
+            weight == sweet.weight &&
+            brand.equals(sweet.brand) &&
+            type.equals(sweet.type);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(brand, price, weight, type);
     }
 }
