@@ -4,5 +4,41 @@
     "price": 100,
     "weight": 10,
     "type": "Caramel"
+  },
+  {
+    "name": "Roshen",
+    "price": 150,
+    "weight": 50,
+    "type": "Waffles"
+  },
+  {
+    "name": "Hershey's",
+    "price": 160,
+    "weight": 30,
+    "type": "Chocolate"
+  },
+  {
+    "name": "Haribo",
+    "price": 200,
+    "weight": 100,
+    "type": "Jelly"
+  },
+  {
+    "name": "Oreo",
+    "price": 170,
+    "weight": 40,
+    "type": "Cookie"
+  },
+  {
+    "name": "Chupa Chups",
+    "price": 90,
+    "weight": 25,
+    "type": "Lollipop"
+  },
+  {
+    "name": "Milka",
+    "price": 145,
+    "weight": 60,
+    "type": "Biscuit"
   }
 ]
