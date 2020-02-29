@@ -20,7 +20,7 @@ public class Calculator {
         calculateV1basic(number1, operator, number2);
     }
 
-    private static void calculateV1basic(int number1, String operation, int number2) {
+    private static void calculateV1basic(double number1, String operation, double number2) {
         if ((operation.length() != 1) | (!operation.matches("[/*\\-+]"))) {
             throw new IllegalArgumentException("Wrong or unsupported operator: " + operation);
         }
@@ -46,7 +46,7 @@ public class Calculator {
         }
     }
 
-    private static void calculateV2basic(int number1, String operation, int number2) {
+    private static void calculateV2basic(double number1, String operation, double number2) {
         String outputPrefix = "The answer is: ";
 
         switch (operation) {

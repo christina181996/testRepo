@@ -1,31 +1,45 @@
 package one_one;
 
+import org.apache.commons.lang3.RandomStringUtils;
+
 import java.util.ArrayList;
 import java.util.List;
-
-import org.apache.commons.lang3.RandomStringUtils;
 
 public class Tasks {
 
 
+    static List<String> randomStringList = randomStringListGenerator();
+
     public static void main(String[] args) {
-        findSecondLongerItem();
+        System.out.format("The second largest String is: %s with %d length", findSecondLongerItem(), findSecondLongerItem().length());
     }
 
-    private static void findSecondLongerItem() {
-
+    private static List<String> randomStringListGenerator() {
         List<String> list = new ArrayList<>();
-
         for (int i = 0; i < 10; i++) {
             String current = RandomStringUtils.randomAlphabetic(3, 12);
             list.add(current);
-            System.out.println(i + 1 + " : " + current.length() + " : " + current);
+            System.out.println(i + 1 + ": " + current.length() + ": " + current);
         }
+        return list;
+    }
 
-        int firstLongestSize = 0;
-        int secondLongestSize = 0;
-
-        System.out.println(firstLongestSize);
-        System.out.println(secondLongestSize);
+    private static String findSecondLongerItem() {
+        int maxLength = 0;
+        String longestString = null;
+        String secondLongestString = null;
+        for (String values : randomStringList) {
+            if (values.length() > maxLength) {
+                maxLength = values.length();
+                longestString = values;
+            }
+        }
+//        for (String values : randomStringList) {
+//            assert longestString != null;
+//            if (values.length() < longestString.length()) {
+//                secondLongestString = values;
+//            }
+//        }
+        return longestString;
     }
 }
