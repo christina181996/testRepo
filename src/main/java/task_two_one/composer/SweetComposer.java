@@ -1,4 +1,4 @@
-package two_one.composer;
+package task_two_one.composer;
 
 import java.io.FileNotFoundException;
 import java.io.FileReader;
@@ -15,7 +15,7 @@ import lombok.experimental.UtilityClass;
 import lombok.extern.log4j.Log4j;
 import three_one.SweetNotFoundException;
 import three_one.UnsupportedDeletionOperationException;
-import two_one.sweets.Sweet;
+import task_two_one.sweets.Sweet;
 
 @UtilityClass
 @Log4j

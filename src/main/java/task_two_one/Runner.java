@@ -1,10 +1,10 @@
-package two_one;
+package task_two_one;
 
 import java.util.List;
 
-import two_one.composer.ChristmasPresent;
-import two_one.composer.SweetComposer;
-import two_one.sweets.Sweet;
+import task_two_one.composer.ChristmasPresent;
+import task_two_one.composer.SweetComposer;
+import task_two_one.sweets.Sweet;
 
 public class Runner {
 
