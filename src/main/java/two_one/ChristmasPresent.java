@@ -3,17 +3,27 @@ package two_one;
 import java.util.ArrayList;
 
 public class ChristmasPresent {
-    private ArrayList<Sweet> presentContent;
+    private static ArrayList<Sweet> presentContent;
+    private static int totalWeight = getPresentWeight();
+    private static int totalPrice = getPresentPrice();
 
     public ChristmasPresent(ArrayList<Sweet> presentContent) {
         this.presentContent = presentContent;
     }
 
-    public int getPresentWeight() {
-        int totalWeight = 0;
+    public static int getPresentWeight() {
+        int presentWeight = 0;
         for (Sweet candiesWeights : presentContent) {
-            totalWeight += candiesWeights.getWeight();
+            presentWeight += candiesWeights.getWeight();
         }
-        return totalWeight;
+        return presentWeight;
+    }
+
+    public static int getPresentPrice() {
+        int presentPrice = 0;
+        for (Sweet candiesPrices : presentContent) {
+            presentPrice += candiesPrices.getPrice();
+        }
+        return presentPrice;
     }
 }
