@@ -1,6 +1,9 @@
-package two_one;
+package two_one.composer;
 
 import java.util.List;
+
+import three_one.UnacceptableDiscountSize;
+import two_one.sweets.Sweet;
 
 public class ChristmasPresent {
     private int totalWeight;
@@ -9,7 +12,6 @@ public class ChristmasPresent {
     public ChristmasPresent(List<Sweet> presentContent) {
         getPresentPrice(presentContent);
         getPresentWeight(presentContent);
-        closeUp();
     }
 
     private void getPresentWeight(List<Sweet> list) {
@@ -24,9 +26,16 @@ public class ChristmasPresent {
         }
     }
 
-    private void closeUp() {
+    public void summarize() {
         System.out.println("Your present price is: " + totalPrice);
         System.out.println("Your present weight is: " + totalWeight);
     }
 
+    public void summarize(double discount) {
+        if (discount > 25 | discount < 0) {
+            throw new UnacceptableDiscountSize("too much discount for particular oder: " + discount);
+        }
+        System.out.println("Your present price is: " + (totalPrice - (totalPrice * discount / 100)));
+        System.out.println("Your present weight is: " + totalWeight);
+    }
 }

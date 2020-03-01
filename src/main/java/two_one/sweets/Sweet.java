@@ -1,4 +1,4 @@
-package two_one;
+package two_one.sweets;
 
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
