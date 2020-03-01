@@ -11,6 +11,6 @@ public class Runner {
 
         List<Sweet> georgiOrder = SweetComposer.getBunchOfSweets();
 
-        ChristmasPresent presentForGeori = new ChristmasPresent(georgiOrder);
+        ChristmasPresent presentForGeorgi = new ChristmasPresent(georgiOrder);
     }
 }
