@@ -13,14 +13,14 @@ public class ChristmasPresent {
     }
 
     private void getPresentWeight(List<Sweet> list) {
-        for (Sweet candiesWeights : list) {
-            totalPrice += candiesWeights.getPrice();
+        for (Sweet current : list) {
+            totalPrice += current.getPrice();
         }
     }
 
     private void getPresentPrice(List<Sweet> list) {
-        for (Sweet candiesPrices : list) {
-            totalWeight += candiesPrices.getWeight();
+        for (Sweet current : list) {
+            totalWeight += current.getWeight();
         }
     }
 
