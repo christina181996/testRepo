@@ -8,8 +8,10 @@ public class Runner {
 
         SweetComposer.addToBunch();
         SweetComposer.removeFromBunch();
-
         List<Sweet> georgiOrder = SweetComposer.getBunchOfSweets();
+
+        SweetComposer.isListContainsSweet("Roshen");
+        SweetComposer.getSweetOfIndex(7);
 
         ChristmasPresent presentForGeorgi = new ChristmasPresent(georgiOrder);
     }

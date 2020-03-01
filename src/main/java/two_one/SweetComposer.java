@@ -3,6 +3,7 @@ package two_one;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -12,6 +13,7 @@ import java.util.stream.Collectors;
 import com.google.gson.Gson;
 import lombok.experimental.UtilityClass;
 import lombok.extern.log4j.Log4j;
+import three_one.SweetNotFoundException;
 import three_one.UnsupportedDeletionOperationException;
 
 @UtilityClass
@@ -27,35 +29,11 @@ public class SweetComposer {
         getListOfObjectsFromDataSource();
         validateUserInput();
         getUserInputSweetList();
+        sortCollectedList();
         return userInputSweetList;
     }
 
     public static void addToBunch() {
-        getUserInputNameList();
-    }
-
-    public static void removeFromBunch(){
-        Scanner scanner = new Scanner(System.in);
-
-        //get sweet name from user
-        System.out.print("Input name of sweet to remove: ");
-        String current = scanner.nextLine();
-
-        //get count of particular sweet
-        if (!current.equals("quit")) {
-            System.out.print("Input quantity of " + current + " to remove: ");
-            int count = scanner.nextInt();
-            //add user required number of sweet to the list
-            for (int i = 0; i < count; i++) {
-                if(!userInputNameList.remove(current)){
-                    throw new UnsupportedDeletionOperationException("No enough amount added");
-                }
-            }
-            getUserInputNameList();
-        }
-    }
-
-    private static void getUserInputNameList() {
         Scanner scanner = new Scanner(System.in);
 
         //get sweet name from user
@@ -70,7 +48,51 @@ public class SweetComposer {
             for (int i = 0; i < count; i++) {
                 userInputNameList.add(current);
             }
-            getUserInputNameList();
+            addToBunch();
+        }
+    }
+
+    public static void removeFromBunch() {
+        Scanner scanner = new Scanner(System.in);
+
+        //get sweet name from user
+        System.out.print("Input name of sweet to remove: ");
+        String current = scanner.nextLine();
+
+        //get count of particular sweet
+        if (!current.equals("quit")) {
+            System.out.print("Input quantity of " + current + " to remove: ");
+            int count = scanner.nextInt();
+            //remove user required number of sweet from the list
+            for (int i = 0; i < count; i++) {
+                if (!userInputNameList.remove(current)) {
+                    throw new UnsupportedDeletionOperationException("No enough amount added");
+                }
+            }
+            removeFromBunch();
+        }
+    }
+
+    public static void getSweetOfIndex(int index) {
+        if (index <= userInputSweetList.size()) {
+            System.out.println("Sweet in " + index + " index is: " + userInputSweetList.get(index).getBrand());
+        } else {
+            throw new IndexOutOfBoundsException("No enough items in the list");
+        }
+    }
+
+    public boolean isListContainsSweet(String sweetName) {
+        List<String> sweetNames = userInputSweetList
+            .stream()
+            .distinct()
+            .map(sweet -> sweet.getBrand())
+            .collect(Collectors.toList());
+
+        if (!sweetNames.contains(sweetName)) {
+            throw new SweetNotFoundException("Sweet wasn't found in user ordered list");
+        } else {
+            System.out.println(sweetName + " exist in user ordered list");
+            return true;
         }
     }
 
@@ -82,7 +104,7 @@ public class SweetComposer {
             //getting list of objects from data source
             dataSourceSweetList = List.of(new Gson().fromJson(fileReader, Sweet[].class));
         } catch (FileNotFoundException fnoe) {
-           log.error("Unable to locate file in: " + filePath);
+            log.error("Unable to locate file in: " + filePath);
         }
 
         //getting map from list of object
@@ -107,5 +129,9 @@ public class SweetComposer {
         for (String currentName : userInputNameList) {
             userInputSweetList.add(dataSourceSweetMap.get(currentName));
         }
+    }
+
+    private static void sortCollectedList() {
+        Collections.sort(userInputSweetList);
     }
 }
