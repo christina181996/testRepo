@@ -4,12 +4,14 @@ import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
 
 @Getter
 @Setter
 @EqualsAndHashCode
 @AllArgsConstructor
-abstract class Sweet implements Comparable<Sweet> {
+@ToString
+public class Sweet implements Comparable<Sweet> {
     private String brand;
     private int price;
     private int weight;

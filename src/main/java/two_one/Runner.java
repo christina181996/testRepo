@@ -1,15 +1,23 @@
 package two_one;
 
+import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
+import com.google.gson.Gson;
+
 public class Runner {
 
     private static List<String> userInput = new ArrayList<>();
+    private static List<Sweet> sweetList = new ArrayList<>();
 
     public static void main(String[] args) {
         getUserInput();
+        getObjectsFromUserInput();
+        System.out.println(sweetList);
+
     }
 
     private static void getUserInput() {
@@ -28,7 +36,20 @@ public class Runner {
         }
     }
 
-    private void calculatePrice(){
+    private static void validateUserInput(List<String> list) {
 
+    }
+
+    private static void getObjectsFromUserInput() {
+        FileReader fileReader = null;
+        Gson gson = new Gson();
+
+        try {
+            fileReader = new FileReader("src/main/resources/sweets.json");
+        } catch (FileNotFoundException fnoe) {
+            System.out.println("Unable to locate file");
+        }
+
+        sweetList = List.of(gson.fromJson(fileReader, Sweet[].class));
     }
 }
