@@ -17,8 +17,16 @@ public class SweetComposer {
 
     private static List<String> userInputNameList = new ArrayList<>();
     private static List<Sweet> dataSourceSweetList = new ArrayList<>();
-    private static Map<String, Sweet> map = new HashMap<>();
+    private static Map<String, Sweet> dataSourceSweetMap = new HashMap<>();
     private static List<Sweet> userInputSweetList = new ArrayList<>();
+
+    public static List<Sweet> getBunchOfSweets() {
+        getUserInputNameList();
+        getListOfObjectsFromDataSource();
+        validateUserInput();
+        getUserInputSweetList();
+        return userInputSweetList;
+    }
 
     private static void getUserInputNameList() {
         Scanner scanner = new Scanner(System.in);
@@ -37,45 +45,34 @@ public class SweetComposer {
     }
 
     private static void getListOfObjectsFromDataSource() {
-        FileReader fileReader = null;
-        Gson gson = new Gson();
-
+        FileReader fileReader;
+        String filePath = "src/main/resources/sweets.json";
         try {
-            fileReader = new FileReader("src/main/resources/sweets.json");
-            dataSourceSweetList = List.of(gson.fromJson(fileReader, Sweet[].class));
+            fileReader = new FileReader(filePath);
+            //getting list of objects from data source
+            dataSourceSweetList = List.of(new Gson().fromJson(fileReader, Sweet[].class));
         } catch (FileNotFoundException fnoe) {
-            System.out.println("Unable to locate file");
+            System.out.println("Unable to locate file in: " + filePath);
         }
 
+        //getting map from list of object
         for (Sweet sweet : dataSourceSweetList) {
-            map.put(sweet.getBrand(), sweet);
+            dataSourceSweetMap.put(sweet.getBrand(), sweet);
         }
     }
 
     private static void validateUserInput() {
-        List<String> stockBrands = new ArrayList<>();
         List<String> userInputNameUniqueList = userInputNameList.stream().distinct().collect(Collectors.toList());
-        for (Sweet current : dataSourceSweetList) {
-            stockBrands.add(current.getBrand());
-        }
 
-        if (!stockBrands.containsAll(userInputNameUniqueList)) {
-            userInputNameUniqueList.removeAll(stockBrands);
+        if (!dataSourceSweetMap.keySet().containsAll(userInputNameUniqueList)) {
+            userInputNameUniqueList.removeAll(dataSourceSweetMap.keySet());
             throw new IllegalArgumentException("wrong user input(s): " + userInputNameUniqueList);
         }
     }
 
     private static void getUserInputSweetList() {
         for (String currentName : userInputNameList) {
-            userInputSweetList.add(map.get(currentName));
+            userInputSweetList.add(dataSourceSweetMap.get(currentName));
         }
-    }
-
-    public static List<Sweet> getBunchOfSweets() {
-        getUserInputNameList();
-        getListOfObjectsFromDataSource();
-        validateUserInput();
-        getUserInputSweetList();
-        return userInputSweetList;
     }
 }
