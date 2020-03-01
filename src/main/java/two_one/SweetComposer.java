@@ -11,8 +11,11 @@ import java.util.stream.Collectors;
 
 import com.google.gson.Gson;
 import lombok.experimental.UtilityClass;
+import lombok.extern.log4j.Log4j;
+import three_one.UnsupportedDeletionOperationException;
 
 @UtilityClass
+@Log4j
 public class SweetComposer {
 
     private static List<String> userInputNameList = new ArrayList<>();
@@ -21,23 +24,47 @@ public class SweetComposer {
     private static List<Sweet> userInputSweetList = new ArrayList<>();
 
     public static List<Sweet> getBunchOfSweets() {
-        getUserInputNameList();
         getListOfObjectsFromDataSource();
         validateUserInput();
         getUserInputSweetList();
         return userInputSweetList;
     }
 
-    private static void getUserInputNameList() {
+    public static void addToBunch() {
+        getUserInputNameList();
+    }
+
+    public static void removeFromBunch(){
         Scanner scanner = new Scanner(System.in);
 
         //get sweet name from user
-        System.out.print("Input name of sweet: ");
+        System.out.print("Input name of sweet to remove: ");
         String current = scanner.nextLine();
 
         //get count of particular sweet
         if (!current.equals("quit")) {
-            System.out.print("Input quantity of " + current + ": ");
+            System.out.print("Input quantity of " + current + " to remove: ");
+            int count = scanner.nextInt();
+            //add user required number of sweet to the list
+            for (int i = 0; i < count; i++) {
+                if(!userInputNameList.remove(current)){
+                    throw new UnsupportedDeletionOperationException("No enough amount added");
+                }
+            }
+            getUserInputNameList();
+        }
+    }
+
+    private static void getUserInputNameList() {
+        Scanner scanner = new Scanner(System.in);
+
+        //get sweet name from user
+        System.out.print("Input name of sweet to add: ");
+        String current = scanner.nextLine();
+
+        //get count of particular sweet
+        if (!current.equals("quit")) {
+            System.out.print("Input quantity of " + current + " to add: ");
             int count = scanner.nextInt();
             //add user required number of sweet to the list
             for (int i = 0; i < count; i++) {
@@ -55,7 +82,7 @@ public class SweetComposer {
             //getting list of objects from data source
             dataSourceSweetList = List.of(new Gson().fromJson(fileReader, Sweet[].class));
         } catch (FileNotFoundException fnoe) {
-            System.out.println("Unable to locate file in: " + filePath);
+           log.error("Unable to locate file in: " + filePath);
         }
 
         //getting map from list of object

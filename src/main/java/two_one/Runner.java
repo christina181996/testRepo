@@ -6,6 +6,9 @@ public class Runner {
 
     public static void main(String[] args) {
 
+        SweetComposer.addToBunch();
+        SweetComposer.removeFromBunch();
+
         List<Sweet> georgiOrder = SweetComposer.getBunchOfSweets();
 
         ChristmasPresent presentForGeori = new ChristmasPresent(georgiOrder);
