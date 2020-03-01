@@ -5,6 +5,7 @@ import java.io.FileReader;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
+import java.util.stream.Collectors;
 
 import com.google.gson.Gson;
 
@@ -16,8 +17,7 @@ public class Runner {
     public static void main(String[] args) {
         getUserInput();
         getObjectsFromUserInput();
-        System.out.println(sweetList);
-
+        validateUserInput();
     }
 
     private static void getUserInput() {
@@ -36,8 +36,17 @@ public class Runner {
         }
     }
 
-    private static void validateUserInput(List<String> list) {
+    private static void validateUserInput() {
+        List<String> stockBrands = new ArrayList<>();
+        userInput = userInput.stream().distinct().collect(Collectors.toList());
+        for (Sweet current : sweetList) {
+            stockBrands.add(current.getBrand());
+        }
 
+        if (!stockBrands.containsAll(userInput)) {
+            userInput.removeAll(stockBrands);
+            throw new IllegalArgumentException("wrong user input(s): " + userInput);
+        }
     }
 
     private static void getObjectsFromUserInput() {
