@@ -1,9 +1,9 @@
-package task_two_one.composer;
+package aaaa.task_two_one.composer;
 
 import java.util.List;
 
-import three_one.UnacceptableDiscountSize;
-import task_two_one.sweets.Sweet;
+import aaaa.three_one.UnacceptableDiscountSize;
+import aaaa.task_two_one.sweets.Sweet;
 
 public class ChristmasPresent {
     private int totalWeight;

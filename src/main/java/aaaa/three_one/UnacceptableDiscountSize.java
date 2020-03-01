@@ -1,4 +1,4 @@
-package three_one;
+package aaaa.three_one;
 
 public class UnacceptableDiscountSize extends RuntimeException {
     public UnacceptableDiscountSize(String message) {

@@ -1,4 +1,4 @@
-package one_one;
+package aaaa.one_one;
 
 import java.util.Scanner;
 

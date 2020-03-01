@@ -1,4 +1,4 @@
-package task_two_one.sweets;
+package aaaa.task_two_one.sweets;
 
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
