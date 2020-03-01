@@ -1,29 +1,32 @@
 package two_one;
 
-import java.util.ArrayList;
+import java.util.List;
 
 public class ChristmasPresent {
-    private static ArrayList<Sweet> presentContent;
-    private static int totalWeight = getPresentWeight();
-    private static int totalPrice = getPresentPrice();
+    private int totalWeight;
+    private int totalPrice;
 
-    public ChristmasPresent(ArrayList<Sweet> presentContent) {
-        this.presentContent = presentContent;
+    public ChristmasPresent(List<Sweet> presentContent) {
+        getPresentPrice(presentContent);
+        getPresentWeight(presentContent);
+        closeUp();
     }
 
-    public static int getPresentWeight() {
-        int presentWeight = 0;
-        for (Sweet candiesWeights : presentContent) {
-            presentWeight += candiesWeights.getWeight();
+    private void getPresentWeight(List<Sweet> list) {
+        for (Sweet candiesWeights : list) {
+            totalPrice += candiesWeights.getPrice();
         }
-        return presentWeight;
     }
 
-    public static int getPresentPrice() {
-        int presentPrice = 0;
-        for (Sweet candiesPrices : presentContent) {
-            presentPrice += candiesPrices.getPrice();
+    private void getPresentPrice(List<Sweet> list) {
+        for (Sweet candiesPrices : list) {
+            totalWeight += candiesPrices.getWeight();
         }
-        return presentPrice;
     }
+
+    private void closeUp() {
+        System.out.println("Your present price is: " + totalPrice);
+        System.out.println("Your present weight is: " + totalWeight);
+    }
+
 }
