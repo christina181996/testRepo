@@ -86,7 +86,7 @@ public class SweetComposer {
         List<String> sweetNames = userInputSweetList
             .stream()
             .distinct()
-            .map(sweet -> sweet.getBrand())
+            .map(Sweet::getBrand)
             .collect(Collectors.toList());
 
         if (!sweetNames.contains(sweetName)) {
