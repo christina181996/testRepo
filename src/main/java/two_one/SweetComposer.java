@@ -31,12 +31,15 @@ public class SweetComposer {
     private static void getUserInputNameList() {
         Scanner scanner = new Scanner(System.in);
 
+        //get sweet name from user
         System.out.print("Input name of sweet: ");
         String current = scanner.nextLine();
 
+        //get count of particular sweet
         if (!current.equals("quit")) {
             System.out.print("Input quantity of " + current + ": ");
             int count = scanner.nextInt();
+            //add user required number of sweet to the list
             for (int i = 0; i < count; i++) {
                 userInputNameList.add(current);
             }
@@ -62,8 +65,10 @@ public class SweetComposer {
     }
 
     private static void validateUserInput() {
+        //get unique list total user input
         List<String> userInputNameUniqueList = userInputNameList.stream().distinct().collect(Collectors.toList());
 
+        //validate if user wants only sweet which is in our data source
         if (!dataSourceSweetMap.keySet().containsAll(userInputNameUniqueList)) {
             userInputNameUniqueList.removeAll(dataSourceSweetMap.keySet());
             throw new IllegalArgumentException("wrong user input(s): " + userInputNameUniqueList);
@@ -71,6 +76,7 @@ public class SweetComposer {
     }
 
     private static void getUserInputSweetList() {
+        //fill list of sweets based on user need
         for (String currentName : userInputNameList) {
             userInputSweetList.add(dataSourceSweetMap.get(currentName));
         }
